@@ -4,4 +4,4 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
 def hello_world():
-    return "st.write"
+    return "<h1>hai</h1>"
