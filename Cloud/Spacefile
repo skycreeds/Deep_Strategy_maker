@@ -6,4 +6,7 @@ micros:
   - name: DBMAN
     src: ./DBMAN
     engine: python3.9
-    primary: true
+    primary: true 
+    presets:
+      api_keys: true
+            
