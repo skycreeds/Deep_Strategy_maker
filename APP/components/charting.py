@@ -1,30 +1,34 @@
 import plotly as px
+import streamlit as st
 import plotly.graph_objects as go
-from .appiOb import APi
+# from .appiOb import APi
 from . import Tools
+import talib as Tb
 class chaRTTY:
     def __init__(self) -> None:
-        self.temp_asset=''
-        self.Dframe=None
-        self.api=APi()
-    
-    def plot_charti(self,asset):
+      self.temp_asset=""
+      self.dframe=None
+      self.fig=go.Figure()
+      self.api=st.session_state.Api
+    def plotty(self,asset,eMAA=0,ematime=[]):
         if asset != self.temp_asset:
-            self.temp_asset=asset
-            self.Dframe=self.api.getminutedata(self.temp_asset,'1m','1h')
-            fig = go.Figure(data=[go.Candlestick(x=self.Dframe.index,
-                open=self.Dframe['Open'],
-                high=self.Dframe['High'],
-                low=self.Dframe['Low'],
-                close=self.Dframe['Close'])])
+          self.temp_asset=asset
+          self.dframe=self.api.getminutedata(self.temp_asset,'1m','30m')
+        
         else:
-            self.Dframe=Tools.add_Data_Frames(self.Dframe,self.api.getminutedata(self.temp_asset,'1m','1m'))
-            fig=fig.update(data=[go.Candlestick(x=self.Dframe.index,
-                open=self.Dframe['Open'],
-                high=self.Dframe['High'],
-                low=self.Dframe['Low'],
-                close=self.Dframe['Close'])])
-        return fig
+           self.fig=go.Figure()
+           self.dframe=Tools.add_Data_Frames(self.dframe,self.api.getminutedata(self.temp_asset,'1m','1m'))
+           
+
+           self.fig.add_candlestick(x=self.dframe.index,
+                open=self.dframe['Open'],
+                high=self.dframe['High'],
+                low=self.dframe['Low'],
+                close=self.dframe['Close'],name=self.temp_asset)
+           self.fig=Tools.ema(eMAA,self.fig,self.dframe,ematime)
+
+        return self.fig
+       
 
         
 
