@@ -4,6 +4,8 @@ import pandas as pd
 import talib as Tb
 
 
+
+
 def file_join_dir(file):#return the file name relative to current file
     return os.path.join(os.path.dirname(os.path.abspath(__file__)),file)
 
@@ -22,9 +24,17 @@ def add_Data_Frames(def1,def2):
 def ema(t,fig,dframe,etime):
     if t:
         for i in etime:
-            dframe['EMA']=Tb.EMA(dframe['Close'],i)
-            fig=fig.add_scatter(x=dframe.index,y=dframe['EMA'],name='EMA')
+            dframe['EMA']=Tb.EMA(dframe['Close'],etime[i])
+            fig=fig.add_scatter(x=dframe.index,y=dframe['EMA'],name=i)
     return fig
+
+def rsi(t,fig,dframe,rtime):
+    if t:
+        for i in rtime:
+            dframe['RSI']=Tb.RSI(dframe['Close'],rtime[i])
+            fig=fig.add_scatter(x=dframe.index,y=dframe['RSI'],name=i)
+            return fig
+    
 
 
 

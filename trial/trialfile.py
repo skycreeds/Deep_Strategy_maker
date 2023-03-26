@@ -8,6 +8,8 @@ from binance.client import Client
 import streamlit as st
 import plotly as px
 import plotly.graph_objects as go
+import plotly.subplots as subplot
+
 
 # client = Client(api_key, api_secret)
 
@@ -132,16 +134,6 @@ import os
 #                 high=self.Dframe['High'],
 #                 low=self.Dframe['Low'],
 # 
-#    
-#              close=self.Dframe['Close'])])
-if "IT" not in st.session_state:
-    st.session_state.IT=0
-def create_inputs():
-    st.session_state.IT=st.session_state.IT+1
-    for i in range(0,st.session_state.IT):
-        st.number_input('h',key=i)
+# 
 
-select=st.button("hello",on_click=create_inputs())
-
-        
 

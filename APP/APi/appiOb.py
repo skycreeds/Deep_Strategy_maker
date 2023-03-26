@@ -1,6 +1,6 @@
 import pandas as pd
 from binance.client import Client
-from . import Tools
+from Pcomponents import Tools
 class APi:
     def __init__(self) -> None:
         self.config=Tools.config_RoE()
