@@ -3,7 +3,7 @@ import streamlit as st
 import plotly.graph_objects as go
 # from .appiOb import APi
 from . import Tools
-import talib as Tb
+#import talib as Tb
 class chaRTTY:
     def __init__(self) -> None:
       self.temp_asset=""
