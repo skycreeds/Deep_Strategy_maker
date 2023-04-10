@@ -137,13 +137,14 @@ import os
 # 
 ##################################################################
 
-from barfi import st_barfi, barfi_schemas, Block,compute_engine,ComputeEngine
+from barfi import st_barfi, barfi_schemas, Block,ComputeEngine,load_schema_name
 import streamlit as st
 from barfi import Block
-feed = Block(name='Feed')
+feed = Block(name='DATA Feeder')
+feed.add_option(name='TFrame',type='integer')
 feed.add_output()
 def feed_func(self):
-    self.set_interface(name='Output 1', value=4)
+    self.set_interface(name='Output', value=self.get_option(name='TFrame'))
 feed.add_compute(feed_func)
 
 splitter = Block(name='Splitter')
@@ -165,6 +166,7 @@ def mixer_func(self):
     in_1 = self.get_interface(name='Input 1')
     in_2 = self.get_interface(name='Input 2')
     value = (in_1 + in_2)
+    print(value)
     self.set_interface(name='Output 1', value=value)
 mixer.add_compute(mixer_func)
 
@@ -176,10 +178,19 @@ def result_func(self):
 result.add_compute(result_func)
 
 load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
-
+compute_engine=st.checkbox('activate barfi',value=False)
 
 
 barfi_result = st_barfi(base_blocks=[feed, result, mixer, splitter],
-                     load_schema=load_schema)
+                     compute_engine=False,load_schema=load_schema)
 
-ce=ComputeEngine()
+
+
+
+
+#to execute schema
+if compute_engine:
+        ce=ComputeEngine(blocks=[feed, result, mixer, splitter])
+        ce.add_editor_state(editor_state=barfi_result['editor_state'])
+        ce._map_block_link()
+        ce._execute_compute()

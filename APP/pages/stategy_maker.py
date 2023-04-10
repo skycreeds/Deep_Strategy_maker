@@ -1,12 +1,12 @@
-from barfi import st_barfi, barfi_schemas, Block
+from barfi import st_barfi, barfi_schemas, Block,ComputeEngine
 import streamlit as st
-
-from barfi import Block
-
+from APi.appiOb import APi
+app=APi()
 feed = Block(name='Feed')
 feed.add_output()
 def feed_func(self):
-    self.set_interface(name='Output 1', value=4)
+    jk=app.getminutedata('BTCUSDT','1m','1m')
+    self.set_interface(name='Output 1', value=jk)
 feed.add_compute(feed_func)
 
 splitter = Block(name='Splitter')
@@ -35,6 +35,7 @@ result = Block(name='Result')
 result.add_input()
 def result_func(self):
     in_1 = self.get_interface(name='Input 1')
+    print(in_1)
 result.add_compute(result_func)
 
 load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
@@ -42,8 +43,8 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
 compute_engine = st.checkbox('Activate barfi compute engine', value=False)
 
 barfi_result = st_barfi(base_blocks=[feed, result, mixer, splitter],
-                    compute_engine=compute_engine, load_schema=load_schema)
+                    compute_engine=False ,load_schema=load_schema)
 
 if barfi_result:
     st.write(barfi_result)
-
+Compute_obj=ComputeEngine(blocks=[feed, result, mixer, splitter])
