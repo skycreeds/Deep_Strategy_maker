@@ -1,6 +1,5 @@
 from flask import Flask,jsonify,request
 from binance import Client
-import pandas as pd
 
 api_key="RPMoUjlXHyhmZ1rSAvVx89iWWS5ENczsxNHWGv67i7zY1OLr8gxPdZevmXQg7Guj"
 api_secret="Vwk6pemdQIfF8vkjNYMGqegB9sLXw24ITrVv9FHBCWTINzpTcciOQv27peCX9cyO"
