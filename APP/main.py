@@ -39,6 +39,6 @@ while True:
     with placeholder.container():
          st.plotly_chart(chaRT.plotty(asset=st.session_state['ASSET'],eMAA=1,ematime=Ema))
          st.plotly_chart(chaRT.plotty2(rse=1,rsitime=rsi))
-         time.sleep(1)
+         time.sleep(30)
 
 
