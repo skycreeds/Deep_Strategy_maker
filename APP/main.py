@@ -27,7 +27,8 @@ st.session_state['ASSET']=st.selectbox('select market',                #selectin
                                        ['BTCUSDT','ETHUSDT']
                                        )
 ##############################button render####################################
-st.session_state['Tframe']=st.selectbox('select time frame',['1m','1d'])
+
+st.session_state['Tframe']='1m'
 
 chaRT=chaRTTY(st.session_state["Tframe"])
 
