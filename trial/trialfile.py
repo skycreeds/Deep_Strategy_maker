@@ -141,9 +141,11 @@ from barfi import st_barfi, barfi_schemas, Block,ComputeEngine,load_schema_name
 import streamlit as st
 from barfi import Block
 feed = Block(name='DATA Feeder')
-feed.add_option(name='TFrame',type='integer')
+feed.add_option(name='TFrame',type='select',items=['1m','1d'])
+feed.add_option(name='MAX_lookback',type='integer')
 feed.add_output()
 def feed_func(self):
+
     self.set_interface(name='Output', value=self.get_option(name='TFrame'))
 feed.add_compute(feed_func)
 
