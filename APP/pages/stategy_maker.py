@@ -67,7 +67,35 @@ def COmp_func(self):
         else:
             self.self.set_interface(name='Output', value=False)
 GRoLS.add_compute(COmp_func)
+######################################################################
+And=Block(name="AND")
+And.add_input(name='in1')
+And.add_input(name='in2')
+And.add_output(name='out1')
 
+def And_func(self):
+    in_1=self.get_interface(name='in1')
+    in_2=self.get_interface(name='in2')
+    if in_1 & in_2:
+        self.set_interface(name='out1',value=True)
+    else:
+        self.set_interface(name='out1',value=False)
+And.add_compute(And_func)
+#####################################################################
+Orr=Block(name="OR")
+Orr.add_input(name='in1')
+Orr.add_input(name='in2')
+Orr.add_output(name='out1')
+
+def Orr_func(self):
+    in_1=self.get_interface(name='in1')
+    in_2=self.get_interface(name='in2')
+    if in_1 | in_2:
+        self.set_interface(name='out1',value=True)
+    else:
+        self.set_interface(name='out1',value=False)
+Orr.add_compute(And_func)
+########################################################################
 
 
 
@@ -85,9 +113,9 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
 
-barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS],
-                    compute_engine=True ,load_schema=load_schema)
+barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr],
+                    compute_engine=False ,load_schema=load_schema)
 
-# if barfi_result:
-#     st.write(barfi_result)
-# Compute_obj=ComputeEngine(blocks=[feed, result, mixer, splitter])
+if barfi_result:
+    st.write(barfi_result)
+#Compute_obj=ComputeEngine(blocks=[feed,RsI,result,Ema,GRoLS])
