@@ -1,9 +1,7 @@
-from barfi import st_barfi, barfi_schemas, Block,ComputeEngine
+from barfi import st_barfi, barfi_schemas, Block
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
-import pandas as pd
-import requests as res
 
 feed = Block(name='Data Feed')
 feed.add_output()
@@ -119,3 +117,4 @@ barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr],
 if barfi_result:
     st.write(barfi_result)
 #Compute_obj=ComputeEngine(blocks=[feed,RsI,result,Ema,GRoLS])
+
