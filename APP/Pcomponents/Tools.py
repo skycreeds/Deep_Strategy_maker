@@ -5,7 +5,7 @@ import requests
 import os
 import sys
 import subprocess
-
+os.system('python3 '+'../../barfi1/setup.py install')
 # check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
 
