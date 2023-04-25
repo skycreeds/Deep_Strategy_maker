@@ -5,7 +5,7 @@ import requests
 import os
 import sys
 import subprocess
-os.system('python3 '+'/app/deep_strategy_maker/Deep_Strategy_maker/barfi1/setup.py install')
+os.system('python3 '+'/app/deep_strategy_maker/barfi1/setup.py install')
 import streamlit as st
 import requests
 import os
