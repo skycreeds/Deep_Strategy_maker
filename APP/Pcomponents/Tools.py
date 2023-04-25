@@ -2,11 +2,16 @@ import json
 import os
 import pandas as pd
 import requests
-import talib as Tb
 import os
 import sys
 import subprocess
-os.system('python3 '+'../barfi1/setup.py install')
+os.system('python3 '+'../../barfi1/setup.py install')
+import streamlit as st
+import requests
+import os
+import sys
+import subprocess
+
 # check if the library folder already exists, to avoid building everytime you load the pahe
 if not os.path.isdir("/tmp/ta-lib"):
 
@@ -43,7 +48,7 @@ try:
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--global-option=build_ext", "--global-option=-L/home/appuser/venv/lib/", "--global-option=-I/home/appuser/venv/include/", "ta-lib==0.4.24"])
 finally:
-    import talib as Tb
+    import talib
 
 
 
