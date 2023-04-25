@@ -3,41 +3,6 @@ import talib as Tb
 from APi.appiOb import APi
 from barfi import st_barfi, barfi_schemas, Block
 #####################################################
-# def save_schema(usr:str,schema_name:str,schema_data:dict):
-#     schema=st.session_state.Dbi.Db.get(usr)['schema']
-#     if schema is not None:
-#         print(123)
-#         schema[schema_name]=schema_data
-#         st.session_state.Dbi.Db.update({'schema':schema},usr)
-#     else:
-#         print(345)
-#         schema={}
-#         schema[schema_name]=schema_data
-#         st.session_state.Dbi.Db.update({'schema':schema},usr)
-
-# def load_schemas(usr:str):
-#     schema=st.session_state.Dbi.Db.get(usr)['schema']
-#     if schema is None:
-#         schema={}
-#     schema_names = list(schema.keys())
-#     return {'schema_names': schema_names, 'schemas': schema}
-
-# def load_schema_name(schema_name: str) -> Dict:
-#     schemas_barfi = load_schemas()
-#     if schema_name in schemas_barfi['schema_names']:
-#         schema = schemas_barfi['schemas'][schema_name]
-#         return schema
-#     else:
-#         raise ValueError(
-#             f'Schema :{schema_name}: not found in the saved schemas')
-    
-# def delete_schema(usr:str,schema_name:str):
-#     schema=st.session_state.Dbi.Db.get(usr)['schema']
-#     if schema is None:
-#         schema={}
-#     if schema_name in schema:
-#         del schema[schema_name]
-#     st.session_state.Dbi.Db.update({'schema':schema},usr)
 ######################################################
 feed = Block(name='Data Feed')
 feed.add_output()
@@ -146,20 +111,14 @@ result.add_compute(result_func)
 
 #<--widgets arrangements-->
 
-load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
+usr=st.session_state['usr']
+load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
+
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
 
 barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr],
-                    compute_engine=False ,load_schema=load_schema)
+                    compute_engine=False ,load_schema=load_schema,user=usr)
+st.write(barfi_result)
 
-
-
-if barfi_result:
-    st.write(barfi_result)
-#Compute_obj=ComputeEngine(blocks=[feed,RsI,result,Ema,GRoLS])
-with st.expander('save'):
-    st.write("SAVE schema")
-    if st.button('save'):
-        pass
 
