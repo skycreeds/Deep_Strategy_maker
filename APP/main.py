@@ -6,21 +6,23 @@ import streamlit as st
 from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
+
 #################################################################
 
 ###################################################################################
 
 #session state initialisations
 if 'side_bar' not in st.session_state:
-    st.session_state.side_bar='collapsed'
-    st.session_state.Dbi=DBob.DBcon()
+    st.session_state['side_bar']='collapsed'
+    st.session_state['Dbi']=DBob.DBcon()
+    
 
 
 #page config
 st.set_page_config(page_title='DEEP DASH',
                     page_icon='📈',
                     layout='wide',
-                    initial_sidebar_state=st.session_state.side_bar
+                    initial_sidebar_state=st.session_state['side_bar']
                     )#page configuration
 
 
@@ -84,8 +86,8 @@ if st.session_state.side_bar=='collapsed':
                     rec=st.session_state.Dbi.Db.get(usr1)
                     if rec is not None:
                         if rec['pass']==hash_val:
-                            st.session_state.side_bar='auto'
-                            st.session_state.usr=rec['key']
+                            st.session_state['side_bar']='auto'
+                            st.session_state['usr']=rec['key']
                             st.experimental_rerun()
                         else:
                              st.warning("username or password wrong")
@@ -101,7 +103,7 @@ if st.session_state.side_bar=='collapsed':
             if (usr2 !='') & (psw2 !=''):
                 try:
                     hash_val=hashlib.sha256(psw2.encode()).hexdigest()
-                    st.session_state.Dbi.Db.insert({'key':usr2,'pass':hash_val})
+                    st.session_state['Dbi'].Db.insert({'key':usr2,'pass':hash_val})
                     st.warning('🙋‍♂️ Welcome,Login to continue')
                 except:
                     st.warning('⚠️ User already exist')

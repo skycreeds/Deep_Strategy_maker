@@ -1,8 +1,9 @@
-from barfi import st_barfi, barfi_schemas, Block
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
-
+from barfi import st_barfi, barfi_schemas, Block
+#####################################################
+######################################################
 feed = Block(name='Data Feed')
 feed.add_output()
 feed.add_option(name='TFrame',type='select',items=['1m','1d'],value='1m')
@@ -107,14 +108,17 @@ def result_func(self):
     print(in_1)
 result.add_compute(result_func)
 #############################################################################
-load_schema = st.selectbox('Select a saved schema:', barfi_schemas())
+
+#<--widgets arrangements-->
+
+usr=st.session_state['usr']
+load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
+
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
 
 barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr],
-                    compute_engine=False ,load_schema=load_schema)
+                    compute_engine=False ,load_schema=load_schema,user=usr)
+st.write(barfi_result)
 
-if barfi_result:
-    st.write(barfi_result)
-#Compute_obj=ComputeEngine(blocks=[feed,RsI,result,Ema,GRoLS])
 

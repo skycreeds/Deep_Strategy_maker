@@ -1,7 +1,6 @@
 import pandas as pd
 import requests as res
 from Pcomponents import Tools
-import time
 class APi:
     def getminutedata(self,symbol,interval,lookback):
         print(777777777777777)

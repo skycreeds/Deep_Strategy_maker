@@ -75,6 +75,9 @@ def rsi(t,fig,dframe,rtime):
             dframe['RSI']=Tb.RSI(dframe['Close'],rtime[i])
             fig=fig.add_scatter(x=dframe.index,y=dframe['RSI'],name=i)
             return fig
+
+
+
     
 
 
