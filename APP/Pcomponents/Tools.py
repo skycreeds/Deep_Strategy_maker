@@ -41,7 +41,7 @@ if not os.path.isdir("/tmp/ta-lib"):
 from ctypes import *
 
 lib = CDLL("/home/appuser/venv/lib/libta_lib.so.0.0.0")
-import library
+# import library
 try:
     import talib
 except ImportError:
