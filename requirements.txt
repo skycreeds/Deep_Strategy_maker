@@ -2,3 +2,4 @@
  python-binance
  requests
  deta
+git+https://github.com/skycreeds/mod_barfi.git@main
