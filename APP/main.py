@@ -13,7 +13,7 @@ import os
 package_path = os.path.join(os.path.dirname(__file__), 'barfi/setup.py')
 
 # Install the package using pip
-subprocess.check_call(['python3',package_path,'install'])
+subprocess.check_call(['python',package_path,'install'])
 
 ###################################################################################
 
