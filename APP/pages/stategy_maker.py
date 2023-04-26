@@ -1,7 +1,7 @@
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
-from barfi import st_barfi, barfi_schemas, Block
+from ...barfi import st_barfi, barfi_schemas, Block
 #####################################################
 ######################################################
 feed = Block(name='Data Feed')
