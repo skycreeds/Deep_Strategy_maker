@@ -1,7 +1,9 @@
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
-
+import os,sys
+file_path = '/app/deep_strategy_maker/APP/barfi/'
+sys.path.append(os.path.dirname(file_path))
 from barfi import st_barfi, barfi_schemas, Block
 #####################################################
 ######################################################

@@ -7,7 +7,7 @@ from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
 import sys,os
-file_path = 'barfi/'
+file_path = '/app/deep_strategy_maker/APP/barfi/'
 sys.path.append(os.path.dirname(file_path))############################################################
 
 ###################################################################################
