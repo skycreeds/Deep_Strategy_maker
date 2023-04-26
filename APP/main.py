@@ -8,7 +8,8 @@ from Pcomponents.charting import chaRTTY
 import hashlib
 
 #################################################################
-
+file_path = 'barfi/'
+sys.path.append(os.path.dirname(file_path))
 ###################################################################################
 
 #session state initialisations
