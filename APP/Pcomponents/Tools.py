@@ -5,7 +5,6 @@ import requests
 import os
 import sys
 import subprocess
-os.system('pip install '+'/app/deep_strategy_maker/barfi')
 import streamlit as st
 import requests
 import os
