@@ -1,6 +1,6 @@
 import sys
 sys.path.append('../../')
-from barfi import Block
+from APP.barfi.barfi1.berfi import Block
 import unittest
 
 class TestBarfiBlock(unittest.TestCase):
