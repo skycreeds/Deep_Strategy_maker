@@ -7,13 +7,6 @@ from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
 #################################################################
-import subprocess
-import os
-
-package_path = os.path.join(os.path.dirname(__file__), 'barfi/setup.py')
-
-# Install the package using pip
-subprocess.check_call(['pip','install',package_path,])
 
 ###################################################################################
 
