@@ -10,7 +10,7 @@ import hashlib
 import subprocess
 import os
 
-package_path = os.path.join(os.path.dirname(__file__), 'barfi/dist/barfi-0.7.0-py3-none-any.whl')
+package_path = os.path.join(os.path.dirname(__file__), 'barfi')
 
 # Install the package using pip
 subprocess.check_call(['pip', 'install', package_path])
