@@ -10,10 +10,10 @@ import hashlib
 import subprocess
 import os
 
-package_path = os.path.join(os.path.dirname(__file__), 'barfi/')
+package_path = os.path.join(os.path.dirname(__file__), 'barfi/setup.py')
 
 # Install the package using pip
-subprocess.check_call(['pip', 'install', package_path])
+subprocess.check_call(['python3',package_path,'install'])
 
 ###################################################################################
 
