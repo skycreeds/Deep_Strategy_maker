@@ -2,7 +2,12 @@ import json
 import os
 import pandas as pd
 import requests
-# import os
+import os
+import sys
+import subprocess
+import streamlit as st
+import requests
+import os
 import sys
 import subprocess
 
@@ -36,14 +41,13 @@ import subprocess
 # from ctypes import *
 
 # lib = CDLL("/home/appuser/venv/lib/libta_lib.so.0.0.0")
-# # import library
+# import library
 try:
     import talib
 except ImportError:
     subprocess.check_call([sys.executable, "-m", "pip", "install", "--global-option=build_ext", "--global-option=-L/home/appuser/venv/lib/", "--global-option=-I/home/appuser/venv/include/", "ta-lib==0.4.24"])
 finally:
     import talib as Tb
-
 
 
 

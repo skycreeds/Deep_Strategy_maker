@@ -1,5 +1,4 @@
  plotly
  python-binance
  requests
- barfi
  deta
