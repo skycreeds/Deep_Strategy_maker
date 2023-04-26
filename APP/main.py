@@ -6,10 +6,15 @@ import streamlit as st
 from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
-import os, sys
 #################################################################
-file_path = 'barfi'
-sys.path.append(os.path.dirname(file_path))
+import subprocess
+import os
+
+package_path = os.path.join(os.path.dirname(__file__), 'mypackage/dist/mypackage-0.1-py3-none-any.whl')
+
+# Install the package using pip
+subprocess.check_call(['pip', 'install', package_path])
+
 ###################################################################################
 
 #session state initialisations
