@@ -1,7 +1,7 @@
 import sys
 sys.path.append('../')
 from matplotlib import pyplot as plt
-from barfi import st_barfi, barfi_schemas
+from APP.barfi.barfi1.berfi import st_barfi, barfi_schemas
 import streamlit as st
 from test_blocks import base_blocks, base_blocks_category
 

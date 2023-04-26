@@ -1,4 +1,4 @@
-from barfi import Block
+from APP.barfi.barfi1.berfi import Block
 
 feed = Block(name='Feed')
 feed.add_output()

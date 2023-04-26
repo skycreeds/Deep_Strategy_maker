@@ -1,4 +1,4 @@
-from barfi import st_barfi, barfi_schemas
+from APP.barfi.barfi1.berfi import st_barfi, barfi_schemas
 import streamlit as st
 from test_blocks import process_blocks
 

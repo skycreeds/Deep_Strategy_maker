@@ -1,7 +1,7 @@
 from tkinter.tix import Select
 
 from soupsieve import select
-from barfi import Block
+from APP.barfi.barfi1.berfi import Block
 
 feed = Block(name='Feed')
 feed.add_output()
