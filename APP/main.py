@@ -6,7 +6,9 @@ import streamlit as st
 from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
-#################################################################
+import sys,os
+file_path = 'barfi/'
+sys.path.append(os.path.dirname(file_path))############################################################
 
 ###################################################################################
 
