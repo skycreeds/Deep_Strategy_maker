@@ -6,10 +6,18 @@ import streamlit as st
 from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
-import os, sys
-#################################################################
-file_path = 'barfi'
-sys.path.append(os.path.dirname(file_path))
+import subprocess,sys
+############################################################
+
+# try:
+#   # replace "yourpackage" with the package you want to import
+#   import barfi
+
+# # This block executes only on the first run when your package isn't installed
+# except ModuleNotFoundError as e:
+#   subprocess.Popen([f'{sys.executable} -m pip install git+https://${{token}}@github.com/yourusername/yourrepo.git'], shell=True)
+#   # wait for subprocess to install package before running your actual code below
+#   time.sleep(90)
 ###################################################################################
 
 #session state initialisations
