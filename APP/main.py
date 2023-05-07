@@ -89,7 +89,7 @@ if st.session_state.side_bar=='collapsed':
         if log0sign =='Login':
               st.header('Login')
               usr1=st.text_input('Username',key=1)
-              psw1=st.text_input('Password',key=2)
+              psw1=st.text_input('Password',key=2,type='password')
               if (usr1 !='') & (psw1 !=''):
                     hash_val=hashlib.sha256(psw1.encode()).hexdigest()
                     rec=st.session_state.Dbi.Db.get(usr1)

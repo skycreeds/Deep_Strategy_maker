@@ -1,8 +1,9 @@
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
+import time
 import os,sys
-from barfi import st_barfi, barfi_schemas, Block
+from barfi import st_barfi, barfi_schemas, Block,compute_engine
 #####################################################
 ######################################################
 feed = Block(name='Data Feed')
@@ -96,11 +97,10 @@ def Orr_func(self):
         self.set_interface(name='out1',value=False)
 Orr.add_compute(And_func)
 ########################################################################
-
-
-
-
-
+testBlock=Block(name='testBlock')
+def testBlock_func(self):
+    print(123)
+testBlock.add_compute(testBlock_func)
 ######################################################################
 result = Block(name='Result')
 result.add_input()
@@ -117,9 +117,15 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
 
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
-
-barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr],
+st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,result,Ema,GRoLS,And,Orr,testBlock])
+barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr,testBlock],
                     compute_engine=False ,load_schema=load_schema,user=usr)
 st.write(barfi_result)
-
+if st.button('press me'):
+    for i in range(0,5):
+        
+        st.session_state['compute_obj'].add_editor_state(editor_state=barfi_result['editor_state'])
+        st.session_state['compute_obj']._map_block_link()
+        st.session_state['compute_obj']._execute_compute()
+        time.sleep(1)
 
