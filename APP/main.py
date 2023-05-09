@@ -24,6 +24,10 @@ import subprocess,sys
 if 'side_bar' not in st.session_state:
     st.session_state['side_bar']='collapsed'
     st.session_state['Dbi']=DBob.DBcon()
+    st.session_state['thr_alive']=True
+    st.session_state['buy']=True
+    st.session_state['price']=None
+
     
 
 

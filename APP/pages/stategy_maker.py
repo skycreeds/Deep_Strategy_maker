@@ -5,6 +5,8 @@ import time
 import os,sys
 from barfi import st_barfi, barfi_schemas, Block,compute_engine
 #####################################################
+
+
 ######################################################
 feed = Block(name='Data Feed')
 feed.add_output()
@@ -18,6 +20,7 @@ def feed_func(self):
     lokb=str(self.get_option(name='MAX_lookback'))
     print(lokb)
     jk=self.api.getminutedata('BTCUSDT',Tfr,lokb+'m')
+    st.session_state['price']=jk['Close']
     print(456)
     self.set_interface(name='Output 1', value=jk)
 feed.add_compute(feed_func)
@@ -59,12 +62,12 @@ def COmp_func(self):
     opt=self.get_option(name='sign')
     if opt=='>':
         if in_1>in_2:
-            self.self.set_interface(name='Output', value=True)
+            self.set_interface(name='Output', value=True)
         else:
-            self.self.set_interface(name='Output', value=False)
+            self.set_interface(name='Output', value=False)
     else:
         if in_1<in_2:
-            self.self.set_interface(name='Output', value=True)
+            self.set_interface(name='Output', value=True)
         else:
             self.self.set_interface(name='Output', value=False)
 GRoLS.add_compute(COmp_func)
@@ -102,14 +105,32 @@ def testBlock_func(self):
     print(123)
 testBlock.add_compute(testBlock_func)
 ######################################################################
-result = Block(name='Result')
-result.add_input()
-def result_func(self):
-    in_1 = self.get_interface(name='Input 1')
-    print(in_1)
-result.add_compute(result_func)
+exe = Block(name='EXE')
+exe.add_input(name='buy')
+exe.add_input(name='hold')
+exe.add_input(name='sell')
+#exe.add_option(name='Quantinty',type='integer')
+def exe_func(self):
+   self.api=APi()
+   if self.get_interface(name='buy'):
+       st.session_state['buy']=1
+   elif self.get_interface(name='hold'):
+       st.session_state['buy']=0
+   else:
+       st.session_state['buy']=-1   
+    
+exe.add_compute(exe_func)
 #############################################################################
-
+true=Block(name='True/False')
+true.add_output(name='out')
+true.add_option(name='ops',type='checkbox')
+def true_func(self):
+    if self.get_option(name='ops'):
+        self.set_interface(name='out',value=True)
+    else:
+        self.set_interface(name='out',value=False)
+true.add_compute(true_func)
+##############################################################################
 #<--widgets arrangements-->
 
 usr=st.session_state['usr']
@@ -117,15 +138,9 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
 
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
-st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,result,Ema,GRoLS,And,Orr,testBlock])
-barfi_result = st_barfi(base_blocks=[feed,RsI,result,Ema,GRoLS,And,Orr,testBlock],
+st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true])
+barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true],
                     compute_engine=False ,load_schema=load_schema,user=usr)
 st.write(barfi_result)
-if st.button('press me'):
-    for i in range(0,5):
-        
-        st.session_state['compute_obj'].add_editor_state(editor_state=barfi_result['editor_state'])
-        st.session_state['compute_obj']._map_block_link()
-        st.session_state['compute_obj']._execute_compute()
-        time.sleep(1)
+
 
