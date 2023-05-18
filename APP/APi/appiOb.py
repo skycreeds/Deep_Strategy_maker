@@ -3,7 +3,6 @@ import requests as res
 #from Pcomponents import Tools
 class APi:
     def getminutedata(self,symbol,interval,lookback):
-        print(777777777777777)
         try:
             frame=pd.DataFrame(res.post("https://trade07-1-j3584132.deta.app/",headers={"x-api-key":"a0TvWwDmm4GF_oqheWPNEzJV2RPuzzjPijK6jhvwAoVph"},json={'asset':symbol,'interval':interval,'lookback':lookback}).json())
             frame=frame.iloc[:,:6]

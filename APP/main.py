@@ -27,6 +27,9 @@ if 'side_bar' not in st.session_state:
     st.session_state['thr_alive']=True
     st.session_state['buy']=True
     st.session_state['price']=None
+    st.session_state['data']=None
+    st.session_state['data_lookback']=None
+    st.session_state['backtest']=0
 
     
 

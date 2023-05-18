@@ -7,7 +7,7 @@ import time
 #from threading import Thread
 import hashlib
 st.header('STRATEGY DASHBOARD')
-
+st.session_state['backtest']=0
 usr=st.session_state['usr']
 comp_ob=st.session_state['compute_obj']
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
@@ -83,7 +83,7 @@ while x:
         with col3:
             st.metric(label="Current Amount",value=amt,delta=amt_change )
         with col4:
-            st.metric(label='Profit',value=profit,delta=profit,label_visibility='hidden')
+            st.metric(label='Profit',value='',delta=profit)
 
     time.sleep(5)
 
