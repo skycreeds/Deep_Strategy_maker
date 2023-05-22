@@ -12,7 +12,7 @@ usr=st.session_state['usr']
 comp_ob=st.session_state['compute_obj']
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
-st.write(schema_state)
+#st.write(schema_state)
 
 quat=st.number_input('enter quantity to trade in each signal',min_value=1)
 amt=st.number_input('Amount to trade',min_value=1000)
@@ -31,6 +31,7 @@ own_quant=0
 buy_p=0
 temp_amt=amt
 profit=0
+first_time=1
 while x:
 
     comp_ob.add_editor_state(editor_state=schema_state)
@@ -53,14 +54,15 @@ while x:
             temp=df
         #executing function based on signals
         if temp_sig != sig:
-            if sig:
+            if sig==1:
                 #buy
                 own_quant=own_quant+quat
                 buy_p=df*quat
                 amt=amt-(buy_p)
                 temp_sig=sig
+                first_time=0
                
-            elif not sig:
+            elif sig==-1 and not first_time:
                 #sell
                 profit=(df*quat)-buy_p
                 own_quant=own_quant-quat
@@ -79,6 +81,7 @@ while x:
             st.metric(label='curent price',value=df,delta=delt)
         with col2:
             st.metric(label='signal',value=act[sig])
+            st.metric(label='quantity',value=own_quant)
 
         with col3:
             st.metric(label="Current Amount",value=amt,delta=amt_change )
