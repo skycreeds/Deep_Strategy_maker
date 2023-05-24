@@ -13,14 +13,18 @@ comp_ob=st.session_state['compute_obj']
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
 #st.write(schema_state)
+col1,col2=st.columns(2)
+with col1:
+    quat=st.number_input('enter quantity to trade in each signal',min_value=1)
+with col2:
+    amt=st.number_input('Amount to trade',min_value=1000)
 
-quat=st.number_input('enter quantity to trade in each signal',min_value=1)
-amt=st.number_input('Amount to trade',min_value=1000)
+
+
 x=False
 if st.button('start'):
     x=True
 if st.button('stop'):
-
     x=False
 placeholder=st.empty()
 act={1:'buy',0:'Hold',-1:'Sell'}
@@ -88,6 +92,6 @@ while x:
         with col4:
             st.metric(label='Profit',value='',delta=profit)
 
-    time.sleep(5)
+    time.sleep(2)
 
 #always remember the datastructyre is reverse in time that is the cureent price is n-1

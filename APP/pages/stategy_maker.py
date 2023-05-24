@@ -1,11 +1,13 @@
 import streamlit as st
 import talib as Tb
 from APi.appiOb import APi
-import time
-import os,sys
 from barfi import st_barfi, barfi_schemas, Block,compute_engine
+from TF_api.TF_es import Tensor_mod
+from TF_api import TF_es
 #####################################################
 st.session_state['backtest']=0
+Tensor_mod=Tensor_mod()
+tcn_model=TF_es.load_TCN_model()
 
 ######################################################
 feed = Block(name='Data Feed')
@@ -113,8 +115,9 @@ def Orr_func(self):
 Orr.add_compute(Orr_func)
 ########################################################################
 testBlock=Block(name='testBlock')
+testBlock.add_input(name="inn")
 def testBlock_func(self):
-    print('test block')
+    print('qwqwqwqwqwqwqwqwqqwqw',self.get_interface(name="inn"))
 testBlock.add_compute(testBlock_func)
 ######################################################################
 exe = Block(name='EXE')
@@ -122,7 +125,7 @@ exe.add_input(name='buy')
 exe.add_input(name='sell')
 #exe.add_option(name='Quantinty',type='integer')
 def exe_func(self):
-   print('exe block')
+   print('oppopopopopopopopoppopopopopopopoppopopopopopopopopop')
    if self.get_interface(name='buy'):
        st.session_state['buy']=1
    elif self.get_interface(name='sell'):
@@ -160,6 +163,31 @@ def noti_func(self):
     print('not block')
 noti.add_compute(noti_func)
 ##############################################################################
+###############################################################################
+#<----model blocks------->
+Tcn=Block('TCN model')
+Tcn.add_input(name='datafeed')
+Tcn.add_input(name='ema6')
+Tcn.add_input(name='ema12')
+Tcn.add_input(name='ema26')
+Tcn.add_output(name='signal')
+def Tcn_func(self):
+    print('inside tcn model function1')
+    feeddd = self.get_interface(name='datafeed')
+    print('inside tcn model function2')
+    ema6=self.get_interface(name='ema6')
+    print('inside tcn model function3')
+    ema12=self.get_interface(name='ema12')
+    print('inside tcn model function4')
+    ema26=self.get_interface(name='ema26')
+    print('inside tcn model function5')
+    dat=Tensor_mod.data_preprocess(feeddd=feeddd,ema6=ema6,ema12=ema12,ema26=ema26)
+    print('inside tcn model function6')
+    self.set_interface(name='signal',value=Tensor_mod.predict(param=dat,model=tcn_model))
+    print('inside tcn model function7')
+Tcn.add_compute(Tcn_func)
+###############################################################################
+###############################################################################
 #<--widgets arrangements-->
 
 usr=st.session_state['usr']
@@ -167,8 +195,8 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
 
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
-st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti])
-barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti],
+st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn])
+barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn],
                     compute_engine=True ,load_schema=load_schema,user=usr)
 st.write(barfi_result)
 
