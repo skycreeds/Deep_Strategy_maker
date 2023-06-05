@@ -7,6 +7,257 @@ from APi import DBob
 from Pcomponents.charting import chaRTTY
 import hashlib
 import subprocess,sys
+from barfi import save_schema
+simple_strat={
+  "nodes": [
+    {
+      "type": "Data Feed",
+      "id": "node_16837244427902",
+      "name": "Data Feed-1",
+      "options": [
+        [
+          "TFrame",
+          "1m"
+        ],
+        [
+          "MAX_lookback",
+          10
+        ]
+      ],
+      "state": {},
+      "interfaces": [
+        [
+          "outdatafeed",
+          {
+            "id": "ni_16837244427913",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 31,
+        "y": 206
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    },
+    {
+      "type": "EMA",
+      "id": "node_16837244500904",
+      "name": "EMA-1",
+      "options": [
+        [
+          "lookback",
+          4
+        ]
+      ],
+      "state": {},
+      "interfaces": [
+        [
+          "inema",
+          {
+            "id": "ni_16837244500905",
+            "value": None
+          }
+        ],
+        [
+          "outema",
+          {
+            "id": "ni_16837244500906",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 291,
+        "y": 70
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    },
+    {
+      "type": "EMA",
+      "id": "node_168372445591410",
+      "name": "EMA-2",
+      "options": [
+        [
+          "lookback",
+          8
+        ]
+      ],
+      "state": {},
+      "interfaces": [
+        [
+          "inema",
+          {
+            "id": "ni_168372445591411",
+            "value": None
+          }
+        ],
+        [
+          "outema",
+          {
+            "id": "ni_168372445591412",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 293,
+        "y": 269
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    },
+    {
+      "type": "compare",
+      "id": "node_168372448889816",
+      "name": "compare-1",
+      "options": [
+        [
+          "sign",
+          ">"
+        ]
+      ],
+      "state": {},
+      "interfaces": [
+        [
+          "IN 1",
+          {
+            "id": "ni_168372448889817",
+            "value": None
+          }
+        ],
+        [
+          "IN 2",
+          {
+            "id": "ni_168372448889818",
+            "value": None
+          }
+        ],
+        [
+          "Output",
+          {
+            "id": "ni_168372448889819",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 532,
+        "y": 89
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    },
+    {
+      "type": "EXE",
+      "id": "node_168372449891426",
+      "name": "EXE-1",
+      "options": [],
+      "state": {},
+      "interfaces": [
+        [
+          "buy",
+          {
+            "id": "ni_168372449891527",
+            "value": None
+          }
+        ],
+        [
+          "sell",
+          {
+            "id": "ni_168372449891528",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 1012,
+        "y": 128
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    },
+    {
+      "type": "NOT",
+      "id": "node_168372452182632",
+      "name": "NOT-1",
+      "options": [],
+      "state": {},
+      "interfaces": [
+        [
+          "in",
+          {
+            "id": "ni_168372452182733",
+            "value": None
+          }
+        ],
+        [
+          "out",
+          {
+            "id": "ni_168372452182734",
+            "value": None
+          }
+        ]
+      ],
+      "position": {
+        "x": 758,
+        "y": 239
+      },
+      "width": 200,
+      "twoColumn": False,
+      "customClasses": ""
+    }
+  ],
+  "connections": [
+    {
+      "id": "16837244537949",
+      "from": "ni_16837244427913",
+      "to": "ni_16837244500905"
+    },
+    {
+      "id": "168372448171715",
+      "from": "ni_16837244427913",
+      "to": "ni_168372445591411"
+    },
+    {
+      "id": "168372449245022",
+      "from": "ni_16837244500906",
+      "to": "ni_168372448889817"
+    },
+    {
+      "id": "168372449453325",
+      "from": "ni_168372445591412",
+      "to": "ni_168372448889818"
+    },
+    {
+      "id": "168372450223531",
+      "from": "ni_168372448889819",
+      "to": "ni_168372449891527"
+    },
+    {
+      "id": "168372452575738",
+      "from": "ni_168372448889819",
+      "to": "ni_168372452182733"
+    },
+    {
+      "id": "168372453355641",
+      "from": "ni_168372452182734",
+      "to": "ni_168372449891528"
+    }
+  ],
+  "panning": {
+    "x": 0,
+    "y": 0
+  },
+  "scaling": 1
+}
 ############################################################
 
 # try:
@@ -120,6 +371,7 @@ if st.session_state.side_bar=='collapsed':
                 try:
                     hash_val=hashlib.sha256(psw2.encode()).hexdigest()
                     st.session_state['Dbi'].Db.insert({'key':usr2,'pass':hash_val})
+                    save_schema('simple_strategy',schema_data=simple_strat,user=usr2)
                     st.warning('🙋‍♂️ Welcome,Login to continue')
                 except:
                     st.warning('⚠️ User already exist')
