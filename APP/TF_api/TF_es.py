@@ -45,4 +45,4 @@ class Tensor_mod:
         return tf.argmax(model.predict(param.reshape((1, 6, 1))),axis=1).numpy()[0]
     
     def data_preprocess_Lstm(self,feeddd,ema6,ema12,ema26):
-          
+          pass
