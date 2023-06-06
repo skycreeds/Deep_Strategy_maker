@@ -163,8 +163,9 @@ def noti_func(self):
     print('not block')
 noti.add_compute(noti_func)
 ##############################################################################
-###############################################################################
 #<----model blocks------->
+###############################################################################
+#<--------------------------------TCN model------------------------------->
 Tcn=Block('TCN model')
 Tcn.add_input(name='datafeed')
 Tcn.add_input(name='ema6')
@@ -186,7 +187,8 @@ def Tcn_func(self):
     self.set_interface(name='signal',value=Tensor_mod.predict(param=dat,model=tcn_model))
     #print('inside tcn model function7')
 Tcn.add_compute(Tcn_func)
-
+#######################################################################################################
+#<---------------------------LSTM---------------------------------------------->
 Lstm=Block('LSTM model')
 Lstm.add_input(name='datafeed')
 Lstm.add_input(name='ema6')
