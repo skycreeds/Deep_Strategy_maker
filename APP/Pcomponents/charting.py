@@ -37,9 +37,8 @@ class chaRTTY:
                 low=self.dframe['Low'],
                 close=self.dframe['Close'],name=self.temp_asset)
            self.fig=Tools.ema(eMAA,self.fig,self.dframe,ematime)
-           
-
         return self.fig
+    
     def plotty2(self,rse=0,rsitime={}):
            self.fig2=go.Figure()
            print(222222222222222)

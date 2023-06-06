@@ -42,8 +42,8 @@ def RsI_func(self):
     in_0 = self.get_interface(name='inrsi')
     out_2=Tb.RSI(in_0['Close'],timeperiod=lokk)
     print(345)
-    print('RSI',out_2[len(out_2)-1])
-    self.set_interface(name='outrsi', value=out_2[len(out_2)-1])   
+    print('RSI',out_2)
+    self.set_interface(name='outrsi', value=out_2)   
 RsI.add_compute(RsI_func)
 ######################################################################
 Ema=Block(name='EMA')
@@ -59,7 +59,7 @@ def Ema_func(self):
     out3=Tb.EMA(in_1['Close'],timeperiod=lokk)
     print('ema4')
     print('EMA'+str(lokk),out3[len(out3)-1])
-    self.set_interface(name='outema', value=out3[len(out3)-1])
+    self.set_interface(name='outema', value=out3)
 Ema.add_compute(Ema_func)
 #######################################################################
 GRoLS=Block(name='compare')
@@ -73,12 +73,12 @@ def COmp_func(self):
     in_2=self.get_interface(name='IN 2')
     opt=self.get_option(name='sign')
     if opt=='>':
-        if in_1>in_2:
+        if in_1[len(in_1)-1]>in_2[len(in_2)-1]:
             self.set_interface(name='Output', value=True)
         else:
             self.set_interface(name='Output', value=False)
     else:
-        if in_1<in_2:
+        if in_1[len(in_1)-1]<in_1[len(in_1)-1]:
             self.set_interface(name='Output', value=True)
         else:
             self.self.set_interface(name='Output', value=False)
@@ -172,20 +172,41 @@ Tcn.add_input(name='ema12')
 Tcn.add_input(name='ema26')
 Tcn.add_output(name='signal')
 def Tcn_func(self):
-    print('inside tcn model function1')
+    #print('inside tcn model function1')
     feeddd = self.get_interface(name='datafeed')
-    print('inside tcn model function2')
+    #print('inside tcn model function2')
     ema6=self.get_interface(name='ema6')
-    print('inside tcn model function3')
+    #print('inside tcn model function3')
     ema12=self.get_interface(name='ema12')
-    print('inside tcn model function4')
+    #print('inside tcn model function4')
     ema26=self.get_interface(name='ema26')
-    print('inside tcn model function5')
+    #print('inside tcn model function5')
     dat=Tensor_mod.data_preprocess(feeddd=feeddd,ema6=ema6,ema12=ema12,ema26=ema26)
-    print('inside tcn model function6')
+    #print('inside tcn model function6')
     self.set_interface(name='signal',value=Tensor_mod.predict(param=dat,model=tcn_model))
-    print('inside tcn model function7')
+    #print('inside tcn model function7')
 Tcn.add_compute(Tcn_func)
+
+Lstm=Block('LSTM model')
+Lstm.add_input(name='datafeed')
+Lstm.add_input(name='ema6')
+Lstm.add_input(name='ema12')
+Lstm.add_input(name='ema26')
+Lstm.add_output(name='signal')
+def Lstm_fuc(self):
+     #print('inside tcn model function1')
+    feeddd = self.get_interface(name='datafeed')
+    #print('inside tcn model function2')
+    ema6=self.get_interface(name='ema6')
+    #print('inside tcn model function3')
+    ema12=self.get_interface(name='ema12')
+    #print('inside tcn model function4')
+    ema26=self.get_interface(name='ema26')
+    #print('inside tcn model function5')
+    dat=Tensor_mod.data_preprocess_Lstm(feeddd=feeddd,ema6=ema6,ema12=ema12,ema26=ema26)
+    #print('inside tcn model function6')
+    self.set_interface(name='signal',value=Tensor_mod.LSTM_predict(param=dat,model=tcn_model))
+Lstm.add_compute(Lstm_fuc)
 ###############################################################################
 ###############################################################################
 #<--widgets arrangements-->
@@ -196,6 +217,7 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
 st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn])
+
 barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn],
                     compute_engine=True ,load_schema=load_schema,user=usr)
 st.write(barfi_result)
