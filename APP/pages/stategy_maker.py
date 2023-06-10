@@ -8,7 +8,7 @@ from TF_api import TF_es
 st.session_state['backtest']=0
 Tensor_mod=Tensor_mod()
 tcn_model=TF_es.load_TCN_model()
-
+lstm_model=TF_es.load_LSTM_model()
 ######################################################
 feed = Block(name='Data Feed')
 feed.add_output(name='outdatafeed')
@@ -196,18 +196,18 @@ Lstm.add_input(name='ema12')
 Lstm.add_input(name='ema26')
 Lstm.add_output(name='signal')
 def Lstm_fuc(self):
-    print('inside tcn model function1')
+    print('inside lstm model function1')
     feeddd = self.get_interface(name='datafeed')
-    #print('inside tcn model function2')
+    print('inside lstm model function2')
     ema6=self.get_interface(name='ema6')
-    #print('inside tcn model function3')
+    print('inside lstm model function3')
     ema12=self.get_interface(name='ema12')
-    #print('inside tcn model function4')
+    print('inside lstm model function4')
     ema26=self.get_interface(name='ema26')
-    #print('inside tcn model function5')
+    print('inside lstm model function5')
     dat=Tensor_mod.data_preprocess_Lstm(feeddd=feeddd,ema6=ema6,ema12=ema12,ema26=ema26)
-    #print('inside tcn model function6')
-    self.set_interface(name='signal',value=Tensor_mod.LSTM_predict(param=dat,model=tcn_model))
+    print('inside lstm model function6')
+    self.set_interface(name='signal',value=Tensor_mod.LSTM_predict(param=dat,model=lstm_model))
 Lstm.add_compute(Lstm_fuc)
 ###############################################################################
 ###############################################################################
