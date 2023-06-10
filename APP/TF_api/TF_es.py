@@ -6,12 +6,12 @@ import os
 @st.cache_resource
 def load_TCN_model():
             print(os.getcwd())
-            return tf.keras.models.load_model('./TCN_model.h5')
+            return tf.keras.models.load_model('TCN_model.h5')
         #elif _model_arch=='LSTM':
             #return tf.keras.models.load_model('./LSTM_model.h5')
 @st.cache_resource
 def load_LSTM_model():
-      return tf.keras.models.load_model('./LSTM_model.h5')
+      return tf.keras.models.load_model('LSTM_model.h5')
 class Tensor_mod:
     def __init__(self) -> None:
           pass
