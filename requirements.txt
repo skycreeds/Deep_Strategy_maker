@@ -5,3 +5,4 @@
  tensorflow-cpu
 git+https://github.com/skycreeds/mod_barfi.git@main
 scikit-learn
+numpy
