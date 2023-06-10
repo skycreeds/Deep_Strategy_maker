@@ -196,7 +196,7 @@ Lstm.add_input(name='ema12')
 Lstm.add_input(name='ema26')
 Lstm.add_output(name='signal')
 def Lstm_fuc(self):
-     #print('inside tcn model function1')
+    print('inside tcn model function1')
     feeddd = self.get_interface(name='datafeed')
     #print('inside tcn model function2')
     ema6=self.get_interface(name='ema6')
@@ -218,9 +218,9 @@ load_schema = st.selectbox('Select a saved schema:', barfi_schemas(usr))
 
 
 # compute_engine = st.checkbox('Activate barfi compute engine', value=False)
-st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn])
+st.session_state['compute_obj']=compute_engine.ComputeEngine([feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn,Lstm])
 
-barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn],
+barfi_result = st_barfi(base_blocks=[feed,RsI,exe,Ema,GRoLS,And,Orr,testBlock,true,number,noti,Tcn,Lstm],
                     compute_engine=True ,load_schema=load_schema,user=usr)
 st.write(barfi_result)
 
