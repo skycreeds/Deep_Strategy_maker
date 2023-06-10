@@ -45,10 +45,13 @@ class Tensor_mod:
     
     def data_preprocess_Lstm(self,feeddd,ema6,ema12,ema26):
         feeddd.reset_index(inplace=True)
+        print('inside dtp 1')
         time=(feeddd['Time'].values).astype(np.int32)
+        print('inside dtp 2')
         param=[[]]
         for i in range(1,5):
-              param[0].append([time[len(feeddd)-i],feeddd['Volume'][len(feeddd)-i],feeddd['Close'][len(feeddd)-i],ema6[len(ema6)-i],ema12[len(ema12)-i],ema26[len(26)-i]])
+              param[0].append([time[len(feeddd)-i],feeddd['Volume'][len(feeddd)-i],feeddd['Close'][len(feeddd)-i],ema6[len(ema6)-i],ema12[len(ema12)-i],ema26[len(ema26)-i]])
+        print('inside dtp 3')
         param=self.standardize(param)
         return param
     
