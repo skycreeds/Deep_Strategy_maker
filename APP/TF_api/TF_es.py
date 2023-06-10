@@ -1,6 +1,5 @@
 import tensorflow as tf
 import streamlit as st
-from sklearn.preprocessing import StandardScaler
 import numpy as np
 import os
 
