@@ -14,11 +14,12 @@ def load_LSTM_model():
 class Tensor_mod:
     def __init__(self) -> None:
           pass
-    
+    #standardize values
     def standardize(self,arr):
           mean=np.mean(arr)
           std=np.std(arr,ddof=2)
           return (arr-mean)/std
+    #Data preprocessing for TCN model (convert the given data to appropriate for model input )
     def data_preprocess(self,feeddd,ema6,ema12,ema26):
 
         feeddd.reset_index(inplace=True)
@@ -31,11 +32,11 @@ class Tensor_mod:
         
        
         return param
-    
+    #prediction function for TCN
     def predict(self,param,model):
         
         return tf.argmax(model.predict(param.reshape((1, 6, 1))),axis=1).numpy()[0]
-    
+    #preprocessing for LSTM
     def data_preprocess_Lstm(self,feeddd,ema6,ema12,ema26):
         feeddd.reset_index(inplace=True)
         

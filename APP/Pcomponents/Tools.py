@@ -9,8 +9,8 @@ import requests
 import os
 import sys
 import subprocess
-
-# check if the library folder already exists, to avoid building everytime you load the pahe
+#Talib in a Quantitative tading library written in C with python wrappers for fasyer computation of streaming trading data
+#check if the library folder already exists, to avoid building everytime you load the page
 if not os.path.isdir("/tmp/ta-lib"):
 
     # Download ta-lib to disk
@@ -61,18 +61,18 @@ def file_join_dir(file):#return the file name relative to current file
             
 #             json.dump(content)
 
-def add_Data_Frames(def1,def2):
+def add_Data_Frames(def1,def2):#concat two dataframes (used to concat current and incoming candlestick data)
     def1=pd.concat([def1,def2])
     return def1
 
-def ema(t,fig,dframe,etime):
+def ema(t,fig,dframe,etime):#process  ema
     if t:
         for i in etime:
             dframe['EMA']=Tb.EMA(dframe['Close'],etime[i])
             fig=fig.add_scatter(x=dframe.index,y=dframe['EMA'],name=i)
     return fig
 
-def rsi(t,fig,dframe,rtime):
+def rsi(t,fig,dframe,rtime):#process rsi 
     if t:
         for i in rtime:
             dframe['RSI']=Tb.RSI(dframe['Close'],rtime[i])

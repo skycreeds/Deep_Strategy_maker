@@ -8,6 +8,7 @@ from Pcomponents.charting import chaRTTY
 import hashlib
 import subprocess,sys
 from barfi import save_schema
+#A premade schema for first time users
 simple_strat={
   "nodes": [
     {
@@ -322,8 +323,8 @@ def main():
         with placeholder.container():
             if chaRT.alert:
                 x=False
-            st.plotly_chart(chaRT.plotty(asset=st.session_state['ASSET'],eMAA=1,ematime=Ema))
-            st.plotly_chart(chaRT.plotty2(rse=1,rsitime=rsi))
+            st.plotly_chart(chaRT.plotty(asset=st.session_state['ASSET'],eMAA=1,ematime=Ema))#render candlestick
+            st.plotly_chart(chaRT.plotty2(rse=1,rsitime=rsi))#render rsi
             
             time.sleep(1)
 

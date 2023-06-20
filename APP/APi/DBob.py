@@ -1,5 +1,6 @@
 from deta import Deta
 import streamlit as st
+#for database connection of deta base
 class DBcon:
     def __init__(self) -> None:
         self.DeTa=Deta(st.secrets['Deta_DB_key'])
