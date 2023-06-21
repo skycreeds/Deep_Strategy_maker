@@ -45,7 +45,7 @@ if st.button('start Backtest'):
     button=1
 if st.button('stop'):
     button=0
-st.write('outside loop')
+
 if button:
      while (lookbak<=dflen):
         window=df2[start:lookbak]
@@ -105,7 +105,7 @@ if button:
                 st.metric(label='Profit',value='',delta=profit)
 
 
-        time.sleep(0.5)
+        
 
 #always remember the datastructyre is reverse in time that is the cureent price is n-1
    
