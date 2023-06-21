@@ -105,7 +105,7 @@ if button:
                 st.metric(label='Profit',value='',delta=profit)
 
 
-        time.sleep(2)
+        time.sleep(0.5)
 
 #always remember the datastructyre is reverse in time that is the cureent price is n-1
    
