@@ -35,7 +35,7 @@ lookbak=st.number_input('enter lookback  for strategy',min_value=1)
 st.subheader("Time frame is locked to 1m ")
 nummm=st.number_input("lookback in minute for data provided",min_value=5)
 df=api.getminutedata('BTCUSDT','1m',str(nummm)+'m')
-
+delay=st.number_input('enetr delay animation',min=0)
 df2=df.copy()
 dflen=len(df2)
 
@@ -105,7 +105,7 @@ if button:
                 st.metric(label='Profit',value='',delta=profit)
 
 
-        time.sleep(0.1)
+        time.sleep(delay)
 
 #always remember the datastructyre is reverse in time that is the cureent price is n-1
    
