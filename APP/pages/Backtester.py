@@ -10,6 +10,7 @@ import pandas as pd
 st.session_state['backtest']=1
 api=APi()
 st.header('BACKTESTING DASHBOARD')
+delay=st.number_input('enter delay animation',min_value=0)
 usr=st.session_state['usr']
 comp_ob=st.session_state['compute_obj']
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
@@ -31,7 +32,7 @@ profit=0
 first_time=1
 ##################################################
 start=0
-delay=st.number_input('enter delay animation',min_value=0)
+
 lookbak=st.number_input('enter lookback  for strategy',min_value=1)
 st.subheader("Time frame is locked to 1m ")
 nummm=st.number_input("lookback in minute for data provided",min_value=5)
