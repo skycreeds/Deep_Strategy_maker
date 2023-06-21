@@ -31,11 +31,11 @@ profit=0
 first_time=1
 ##################################################
 start=0
+delay=st.number_input('enter delay animation',min_value=0)
 lookbak=st.number_input('enter lookback  for strategy',min_value=1)
 st.subheader("Time frame is locked to 1m ")
 nummm=st.number_input("lookback in minute for data provided",min_value=5)
 df=api.getminutedata('BTCUSDT','1m',str(nummm)+'m')
-delay=st.number_input('enetr delay animation',min_value=0)
 df2=df.copy()
 dflen=len(df2)
 
