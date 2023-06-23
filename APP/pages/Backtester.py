@@ -15,7 +15,7 @@ usr=st.session_state['usr']
 try:
     comp_ob=st.session_state['compute_obj']
 except:
-    st.warning('Visit Strategy maker')
+    st.warning('⛔️⛔️⛔️ Visit Strategy maker ⛔️⛔️⛔️ ')
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
 
