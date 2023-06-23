@@ -10,14 +10,14 @@ st.header('STRATEGY DASHBOARD')
 st.session_state['backtest']=0
 usr=st.session_state['usr']
 comp_ob=st.session_state['compute_obj']
-load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
+load_schema=st.selectbox('💡load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
 #st.write(schema_state)
 col1,col2=st.columns(2)
 with col1:
     quat=st.number_input('enter quantity to trade in each signal',min_value=1)
 with col2:
-    amt=st.number_input('Amount to trade',min_value=1000)
+    amt=st.number_input('💰Amount to trade',min_value=1000)
 
 
 
@@ -82,15 +82,15 @@ while x:
       
 
         with col1:
-            st.metric(label='curent price',value=df,delta=delt)
+            st.metric(label='💵curent price',value=df,delta=delt)
         with col2:
-            st.metric(label='signal',value=act[sig])
+            st.metric(label='⚡ signal',value=act[sig])
             st.metric(label='quantity',value=own_quant)
 
         with col3:
             st.metric(label="Current Amount",value=amt,delta=amt_change )
         with col4:
-            st.metric(label='Profit',value='',delta=profit)
+            st.metric(label='📈Profit',value='',delta=profit)
 
     time.sleep(2)
 

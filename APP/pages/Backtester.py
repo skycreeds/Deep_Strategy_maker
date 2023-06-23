@@ -16,11 +16,11 @@ try:
     comp_ob=st.session_state['compute_obj']
 except:
     st.warning('⛔️⛔️⛔️ Visit Strategy maker ⛔️⛔️⛔️ ')
-load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
+load_schema=st.selectbox('💡load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
 
 quat=st.number_input('enter quantity to trade in each signal',min_value=1)
-amt=st.number_input('Amount to trade',min_value=1000)
+amt=st.number_input('💰Amount to trade',min_value=1000)
 
 placeholder=st.empty()
 act={1:'buy',0:'Hold',-1:'Sell'}
@@ -38,7 +38,7 @@ start=0
 
 lookbak=st.number_input('enter lookback  for strategy',min_value=1)
 st.subheader("Time frame is locked to 1m ")
-nummm=st.number_input("lookback in minute for data provided",min_value=5)
+nummm=st.number_input("lookback in minute for backtest data",min_value=5)
 df=api.getminutedata('BTCUSDT','1m',str(nummm)+'m')
 df2=df.copy()
 dflen=len(df2)
