@@ -12,7 +12,10 @@ api=APi()
 st.header('BACKTESTING DASHBOARD')
 delay=st.number_input('enter delay animation',min_value=0.0)
 usr=st.session_state['usr']
-comp_ob=st.session_state['compute_obj']
+try:
+    comp_ob=st.session_state['compute_obj']
+except:
+    st.warning('Visit Strategy maker')
 load_schema=st.selectbox('load strategy ',barfi_schemas(usr))
 schema_state=load_schema_name(load_schema+'@'+hashlib.sha256(usr.encode()).hexdigest(),usr)
 
