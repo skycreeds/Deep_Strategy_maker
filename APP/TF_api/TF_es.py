@@ -4,14 +4,12 @@ import numpy as np
 import os
 
 @st.cache_resource
-def load_TCN_model():
-            print('11111111111111111111111111111111111111111111111',os.getcwd())
-            return tf.keras.models.load_model("/skycreeds/deep_strategy_maker/main/APP/TF_api/TCN_model.h5")
+def load_TCN_model():    
+      return tf.keras.models.load_model(os.getcwd()+"/TCN_model.h5")
             #skycreeds/deep_strategy_maker/main/APP/main.py
 @st.cache_resource
-def load_LSTM_model():
-      print('11111111111111111111111111111111111111111111111',os.getcwd())
-      #return tf.keras.models.load_model("/app/deep_strategy_maker/APP/TF_api/LSTM_model.h5")
+def load_LSTM_model(): 
+      return tf.keras.models.load_model(os.getcwd()+"/LSTM_model.h5")
 class Tensor_mod:
     def __init__(self) -> None:
           pass
