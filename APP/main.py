@@ -260,18 +260,6 @@ simple_strat={
   "scaling": 1
 }
 ############################################################
-
-# try:
-#   # replace "yourpackage" with the package you want to import
-#   import barfi
-
-# # This block executes only on the first run when your package isn't installed
-# except ModuleNotFoundError as e:
-#   subprocess.Popen([f'{sys.executable} -m pip install git+https://${{token}}@github.com/yourusername/yourrepo.git'], shell=True)
-#   # wait for subprocess to install package before running your actual code below
-#   time.sleep(90)
-###################################################################################
-
 #session state initialisations
 if 'side_bar' not in st.session_state:
     st.session_state['side_bar']='collapsed'
