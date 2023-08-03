@@ -7,8 +7,10 @@ import time
 #from threading import Thread
 import hashlib
 import pandas as pd
+import os
 st.session_state['backtest']=1
 api=APi()
+print("11111111111111111111111111111111111111111111111111111111",os.getcwd())
 st.header('BACKTESTING DASHBOARD')
 delay=st.number_input('enter delay animation',min_value=0.0)
 usr=st.session_state['usr']
