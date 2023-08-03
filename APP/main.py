@@ -288,7 +288,7 @@ st.set_page_config(page_title='DEEP DASH',
 
 
 def main():
-
+    print('11111111111111111111111111111111111111111111111',os.getcwd())
     st.title('Deep Trade Dashboard')#Title bar
     st.session_state['ASSET']=st.selectbox('select market',                #selecting market using delectbox
                                         ['BTCUSDT','ETHUSDT']
