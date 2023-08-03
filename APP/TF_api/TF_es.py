@@ -9,7 +9,7 @@ def load_TCN_model():
             #skycreeds/deep_strategy_maker/main/APP/main.py
 @st.cache_resource
 def load_LSTM_model(): 
-      return tf.keras.models.load_model(os.getcwd()+"/LSTM_model.h5")
+      return tf.keras.models.load_model(os.getcwd()+"/APP/TF_api/LSTM_model.h5")
 class Tensor_mod:
     def __init__(self) -> None:
           pass
