@@ -8,6 +8,8 @@ from Pcomponents.charting import chaRTTY
 import hashlib
 import subprocess,sys
 from barfi import save_schema
+import os
+print('11111111111111111111111111111111111111111111111',os.getcwd())
 #A premade schema for first time users
 simple_strat={
   "nodes": [
