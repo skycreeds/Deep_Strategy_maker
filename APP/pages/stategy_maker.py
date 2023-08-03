@@ -1,5 +1,5 @@
 import streamlit as st
-import talib as Tb
+import pandas_ta as Tb
 from APi.appiOb import APi
 from barfi import st_barfi, barfi_schemas, Block,compute_engine
 from TF_api.TF_es import Tensor_mod
@@ -40,7 +40,7 @@ def RsI_func(self):
     
     lokk=self.get_option(name='lookback')
     in_0 = self.get_interface(name='inrsi')
-    out_2=Tb.RSI(in_0['Close'],timeperiod=lokk)
+    out_2=Tb.rsi(in_0['Close'],timeperiod=lokk)
     
     print('RSI',out_2)
     self.set_interface(name='outrsi', value=out_2)   
@@ -56,7 +56,7 @@ def Ema_func(self):
     
     in_1 = self.get_interface(name='inema')
     
-    out3=Tb.EMA(in_1['Close'],timeperiod=lokk)
+    out3=Tb.ema(in_1['Close'],lokk)
     
     print('EMA'+str(lokk),out3[len(out3)-1])
     self.set_interface(name='outema', value=out3)

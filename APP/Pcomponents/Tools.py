@@ -9,46 +9,46 @@ import requests
 import os
 import sys
 import subprocess
-#Talib in a Quantitative tading library written in C with python wrappers for fasyer computation of streaming trading data
-#check if the library folder already exists, to avoid building everytime you load the page
-if not os.path.isdir("/tmp/ta-lib"):
+# #Talib in a Quantitative tading library written in C with python wrappers for fasyer computation of streaming trading data
+# #check if the library folder already exists, to avoid building everytime you load the page
+# if not os.path.isdir("/tmp/ta-lib"):
 
-    # Download ta-lib to disk
-    with open("/tmp/ta-lib-0.4.0-src.tar.gz", "wb") as file:
-        response = requests.get(
-            "http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz"
-        )
-        file.write(response.content)
-    # get our current dir, to configure it back again. Just house keeping
-    default_cwd = os.getcwd()
-    os.chdir("/tmp")
-    # untar
-    os.system("tar -zxvf ta-lib-0.4.0-src.tar.gz")
-    os.chdir("/tmp/ta-lib")
-    # build
-    os.system("./configure --prefix=/home/appuser/venv/")
-    os.system("make")
-    # install
-    os.system("mkdir -p /home/appuser/venv/")
-    os.system("make install")
-    os.system("ls -la /home/appuser/venv/")
-    # back to the cwd
-    os.chdir(default_cwd)
-    sys.stdout.flush()
+#     # Download ta-lib to disk
+#     with open("/tmp/ta-lib-0.4.0-src.tar.gz", "wb") as file:
+#         response = requests.get(
+#             "http://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz"
+#         )
+#         file.write(response.content)
+#     # get our current dir, to configure it back again. Just house keeping
+#     default_cwd = os.getcwd()
+#     os.chdir("/tmp")
+#     # untar
+#     os.system("tar -zxvf ta-lib-0.4.0-src.tar.gz")
+#     os.chdir("/tmp/ta-lib")
+#     # build
+#     os.system("./configure --prefix=/home/appuser/venv/")
+#     os.system("make")
+#     # install
+#     os.system("mkdir -p /home/appuser/venv/")
+#     os.system("make install")
+#     os.system("ls -la /home/appuser/venv/")
+#     # back to the cwd
+#     os.chdir(default_cwd)
+#     sys.stdout.flush()
 
-# add the library to our current environment
-from ctypes import *
+# # add the library to our current environment
+# from ctypes import *
 
-lib = CDLL("/home/appuser/venv/lib/libta_lib.so.0.0.0")
-# import library
-try:
-    import talib
-except ImportError:
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "--global-option=build_ext", "--global-option=-L/home/appuser/venv/lib/", "--global-option=-I/home/appuser/venv/include/", "ta-lib==0.4.24"])
-finally:
-    import talib as Tb
+# lib = CDLL("/home/appuser/venv/lib/libta_lib.so.0.0.0")
+# # import library
+# try:
+#     import talib
+# except ImportError:
+#     subprocess.check_call([sys.executable, "-m", "pip", "install", "--global-option=build_ext", "--global-option=-L/home/appuser/venv/lib/", "--global-option=-I/home/appuser/venv/include/", "ta-lib==0.4.24"])
+# finally:
+#     import talib as Tb
 
-
+import pandas_ta as Tb
 
 def file_join_dir(file):#return the file name relative to current file
     return os.path.join(os.path.dirname(os.path.abspath(__file__)),file)
@@ -68,14 +68,14 @@ def add_Data_Frames(def1,def2):#concat two dataframes (used to concat current an
 def ema(t,fig,dframe,etime):#process  ema
     if t:
         for i in etime:
-            dframe['EMA']=Tb.EMA(dframe['Close'],etime[i])
+            dframe['EMA']=Tb.ema(dframe['Close'],etime[i])
             fig=fig.add_scatter(x=dframe.index,y=dframe['EMA'],name=i)
     return fig
 
 def rsi(t,fig,dframe,rtime):#process rsi 
     if t:
         for i in rtime:
-            dframe['RSI']=Tb.RSI(dframe['Close'],rtime[i])
+            dframe['RSI']=Tb.rsi(dframe['Close'],rtime[i])
             fig=fig.add_scatter(x=dframe.index,y=dframe['RSI'],name=i)
             return fig
 
