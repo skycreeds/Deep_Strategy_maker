@@ -8,8 +8,6 @@ from Pcomponents.charting import chaRTTY
 import hashlib
 import subprocess,sys
 from barfi import save_schema
-import os
-print('11111111111111111111111111111111111111111111111',os.getcwd())
 #A premade schema for first time users
 simple_strat={
   "nodes": [
@@ -288,7 +286,7 @@ st.set_page_config(page_title='DEEP DASH',
 
 
 def main():
-    print('11111111111111111111111111111111111111111111111',os.getcwd())
+
     st.title('Deep Trade Dashboard')#Title bar
     st.session_state['ASSET']=st.selectbox('select market',                #selecting market using delectbox
                                         ['BTCUSDT','ETHUSDT']

@@ -1,12 +1,13 @@
 import pandas as pd
 import requests as res
+import streamlit as st
 #api for getting data from binance through deta proxy
 
 class APi:
     def getminutedata(self,symbol,interval,lookback):
         try:
             #post request is sent with parameters needed
-            frame=pd.DataFrame(res.post("https://trade07-1-j3584132.deta.app/",headers={"x-api-key":"a0TvWwDmm4GF_oqheWPNEzJV2RPuzzjPijK6jhvwAoVph"},json={'asset':symbol,'interval':interval,'lookback':lookback}).json())
+            frame=pd.DataFrame(res.post("https://trade07-1-j3584132.deta.app/",headers={"x-api-key":st.secrets['head']},json={'asset':symbol,'interval':interval,'lookback':lookback}).json())
             #data processing 
             frame=frame.iloc[:,:6]
             frame.columns=['Time','Open','High','Low','Close','Volume']
