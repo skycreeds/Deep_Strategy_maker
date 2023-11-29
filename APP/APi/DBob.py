@@ -3,8 +3,8 @@ import streamlit as st
 #for database connection of deta base
 class DBcon:
     def __init__(self) -> None:
-        self.DeTa=Deta(st.secrets['Deta_DB_key'])
-        self.Db=self.DeTa.Base('deep_base')
+        self.DeTa=Deta('key***********')
+        self.Db=self.DeTa.Base('Database******8')
         #self.DrIve=self.DeTa.Drive('Dash_store')
 
    
