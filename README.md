@@ -5,6 +5,7 @@
   <p align="center">
     Merge trading strategies with DL and ML
     <br/>
+    <a href="https://deep-dash.streamlit.app/">Visit demo site<a/>
     <br/>
     <a href="https://github.com/skycreeds/Deep_Strategy_maker/issues">Report Bug</a>
     .
