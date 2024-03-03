@@ -20,7 +20,8 @@
 ![Screen Shot](screenshot.png)
 
 This project enable you to merge your trading stategies with Deep learning or machine learning models
-Its a fun projects to do and lacks many features contributions are welcomed. 
+Its a fun projects to do and lacks many features.
+contributions are welcomed. 
 
 ## Built With
 
