@@ -32,8 +32,7 @@ Its a fun projects to do and lacks many features contributions are welcomed.
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Follow the steps to install streamlit and following dependencies
 
 ### Prerequisites
 
@@ -62,13 +61,30 @@ streamlit run main.py
 ```
 
 
-## Contributing
+### Get started
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-* If you have suggestions for adding or removing projects, feel free to [open an issue](https://github.com/skycreeds/Deep_Strategy_maker/issues/new) to discuss it, or directly create a pull request after you edit the *README.md* file with necessary changes.
-* Please make sure you check your spelling and grammar.
-* Create individual PR for each suggestion.
-* Please also read through the [Code Of Conduct](https://github.com/skycreeds/Deep_Strategy_maker/blob/main/CODE_OF_CONDUCT.md) before posting your first idea as well.
+![Screen Shot](signup.png)
+* Click on login or signup 
+
+![home page](home1.png)
+* At homepage we can preview the market condition and to update press "R" as price and chard update are static
+
+![home page2](home2.png)
+* Home page also features charts that is candlestick charts with EMA's and a RSI charts
+
+![strategy maker](stratmaker.png)
+* At signup a preset strategy will be provided which can be expanded upon or use as a reference for further development of custom strategies
+
+![back test](backtest.png)
+* Backtest page provide system to backtest the strategies made and provide a feedback about the performance.
+
+![live dashboard](livedash.png)
+* Live dashboard is used to test the strategy in live market
+
+
+### TODO[upcoming features]
+1. System to upload external ml/dl models
+2. Connect to external API's
 
 ### Creating A Pull Request
 
@@ -89,4 +105,3 @@ Distributed under the MIT License. See [LICENSE](https://github.com/skycreeds/De
 ## Acknowledgements
 
 * [christ vincent](https://github.com/skycreeds)
-
