@@ -1,7 +1,7 @@
  plotly
  requests
  deta
- tensorflow-cpu
+ tensorflow
 git+https://github.com/skycreeds/mod_barfi.git@main
 scikit-learn
 numpy
