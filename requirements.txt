@@ -1,7 +1,8 @@
- plotly
- requests
- deta
- tensorflow
+plotly
+requests
+deta
+tensorflow
+keras
 git+https://github.com/skycreeds/mod_barfi.git@main
 scikit-learn
 numpy
